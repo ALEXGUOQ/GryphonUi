@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="renderer" content="webkit">
+        <title>主页</title>
+        <link rel="stylesheet" href="/static/js/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/js/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/static/js/disIndex.css">
+        <script src="/static/js/jquery-1.12.1.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+
+        <style type="text/css">
+            .wpn{
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            body .post.post-works.mtv.cl li {
+                float: left;
+                margin-left: 2.2%;
+                margin-top: 1%;
+                margin-bottom: 1%;
+                width: 22%;
+                border-radius: 3px;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+
+    <body>
+        {%  include 'nav.html' %}
+
+        <div class="wpn">
+            <ul class="post post-works mtv cl">
+                {% for image in images %}
+                    <li>
+                        <img src="{{ image.icon }}" width="400px" height="400px"/>
+                    </li>
+                {% endfor %}
+            </ul>
+            <br/>
+        </div>
+
+        <nav class="page" align="center">
+            <ul class="pagination">
+                <!--上一页-->
+                <li>
+                    <a href="/home/?page={{ prePage }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                {% for page in pages %}
+                    {% if page == pageIndex %}
+                        <li class="active"><a href="/home/?page={{ page }}">{{ page }}<span
+                                class="sr-only">{{ page }}</span></a></li>
+                    {% else %}
+                        <li><a href="/home/?page={{ page }}">{{ page }}<span class="sr-only">{{ page }}</span></a></li>
+                    {% endif %}
+                {% endfor %}
+                <!--下一页-->
+                <li>
+                    <a href="/home/?page={{ nextPage }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+
+                <!--统计-->
+                <li class="disabled">
+                    <a href="" aria-label="Next">
+                        <span aria-hidden="true">一共{{ count }}个结果，分为{{ pageCount }}页</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </body>
+</html>
