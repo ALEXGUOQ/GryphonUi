@@ -6,13 +6,14 @@ from config import pageSize,createPages
 # 灵感
 def inspiration(request,pageIndex):
 	if pageIndex:
+		allCount = pageSize - 2
 		pageIndex = int(pageIndex)
-		tag = '灵感,'
-		images = filterImages(tag,pageIndex, pageSize)
+		tag = '移动'
+		images = filterImages(tag,pageIndex, allCount)
 
 		count = getfilterImagesCount(tag)
-		res = count % pageSize
-		pageCount = count / pageSize
+		res = count % allCount
+		pageCount = count / allCount
 
 		if res != 0:
 			pageCount += 1

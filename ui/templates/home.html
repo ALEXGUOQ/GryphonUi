@@ -24,7 +24,7 @@
                 margin-left: 2.2%;
                 margin-top: 1%;
                 margin-bottom: 1%;
-                width: 22%;
+                width: 16%;
                 border-radius: 3px;
                 overflow: hidden;
             }
@@ -38,7 +38,9 @@
             <ul class="post post-works mtv cl">
                 {% for image in images %}
                     <li>
-                        <img src="{{ image.icon }}" width="400px" height="400px"/>
+                        <a href="{{ image.img }}">
+                            <img src="{{ image.icon }}" width="350px" height="350px"/>
+                        </a>
                     </li>
                 {% endfor %}
             </ul>

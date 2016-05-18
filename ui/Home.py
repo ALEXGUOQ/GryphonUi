@@ -5,7 +5,7 @@ from config import pageSize,createPages
 
 # 首页
 def home(request):
-	pageIndex = int(request.GET.get("page", 10))
+	pageIndex = int(request.GET.get("page", 1))
 	images = getImages(pageIndex,pageSize)
 
 	count = getImagesCount()
