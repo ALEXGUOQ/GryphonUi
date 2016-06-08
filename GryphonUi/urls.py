@@ -24,5 +24,6 @@ urlpatterns = [
 	url(r'^inspiration/(\d+)/$', views.inspiration),
 	url(r'^material/(\d+)/$',views.material),
 	url(r'^photography/(\d+)/$', views.photography),
-	url(r'^girls/(\d+)/$', views.girls),
+	url(r'^girls/(\d+)/$', views.girls,name="girls"),
+	url(r'^getmoergirls/$', views.getMoregirls, name="moreGirls"),
 ]

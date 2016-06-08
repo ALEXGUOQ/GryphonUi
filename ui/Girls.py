@@ -1,6 +1,21 @@
 #coding:utf-8
+import json
+
 from django.http import HttpResponse
+from django.shortcuts import render
+from ui.DBManager import getImages,getMoreGrils
+from config import pageSize,createPages
+
+def createJson(result):
+	result = json.dumps({'result': result}, sort_keys=True)
+	return result
 
 # 美女
 def girls(request,pageIndex):
-	return HttpResponse('美女')
+	pageIndex = int(request.GET.get("page", 1))
+	girls = getImages(pageIndex, pageSize)
+	return render(request,'girls.html',{'girls':girls})
+
+def getMoregirls(request):
+	imges = getMoreGrils()
+	return HttpResponse(createJson(imges))

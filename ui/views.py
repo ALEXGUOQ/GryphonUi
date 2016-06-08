@@ -5,4 +5,4 @@ from ui.Home import home
 from ui.Inspiration import inspiration
 from ui.Material import material
 from ui.Photography import photography
-from ui.Girls import girls
+from ui.Girls import girls,getMoregirls

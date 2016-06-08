@@ -143,7 +143,6 @@ class Image(models.Model):
         managed = False
         db_table = 'image'
 
-
 class Photography(models.Model):
     icon = models.CharField(max_length=1000, blank=True, null=True)
     create_time = models.DateTimeField(blank=True, null=True)
