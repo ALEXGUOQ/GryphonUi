@@ -45,10 +45,14 @@
             -o-transition: all 0.3s ease-in-out;
             transition: all 0.3s ease-in-out;
         }
+
+        #footer {
+            position:relative;
+            margin-top:-60px;/*等于footer的高度*/
+            height:60px;
+            clear:both;
+        }
     </style>
-    <!--[if IE]>
-		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
-	<![endif]-->
 </head>
 <body>
 
@@ -57,9 +61,14 @@
     {% for item in girls %}
         <article class="white-panel">
             <img src="{{ item.icon }}" class="thumbnail gallerybox">
+            <label>{{ item.title }}</label>
         </article>
     {% endfor %}
 </section>
+
+<div align="center" id="footer">
+    <button type="button" class="btn btn-success" onclick="loadMoreData()">加载更多</button>
+</div>
 
 <script src="/static/js/jquery-1.12.1.min.js"></script>
 <script src="/static/js/pinterest_grid.js"></script>
@@ -78,25 +87,24 @@
         });
     });
 
-{#    $("#gallery-wrapper").autobrowse({#}
-{#        url:function (offset) {#}
-{#            return '/getmoergirls';#}
-{#        } ,#}
-{#        template:function(response){#}
-{#            var html = '';#}
-{##}
-{#            for (var i = 0; i < response.result; i++){#}
-{#                html += '<article class="white-panel"><img src="' + response.result[i].icon + ' " class="thumbnail gallerybox"></article>';#}
-{#            }#}
-{#            return html;#}
-{#        },#}
-{#        itemsReturned:function (response) {#}
-{#            return response.result.length;#}
-{#        },#}
-{#        offset:0,#}
-{#        useCache:false,#}
-{#        expiration: 1#}
-{#    });#}
+    function loadMoreData() {
+        jQuery.ajax({
+            url: "/getmoergirls",
+            type: 'get',
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                for (var i=0; i< data.length; i++){
+                    var icon = data[i].fields.icon;
+                    var title = data[i].fields.title;
+                    $("#gallery-wrapper").append('<article class="white-panel"> <img src="' + icon +'" class="thumbnail gallerybox"><label>' + title + '</label></article>');
+                }
+            },
+            error: function (data) {
+                alert("异常！" + data);
+            }
+        });
+    }
 </script>
 <script type="text/javascript">
     //图片画廊插件

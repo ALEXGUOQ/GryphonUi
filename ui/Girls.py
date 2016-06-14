@@ -7,7 +7,7 @@ from ui.DBManager import getImages,getMoreGrils
 from config import pageSize,createPages
 
 def createJson(result):
-	result = json.dumps({'result': result}, sort_keys=True)
+	result = json.dumps(result, sort_keys=True)
 	return result
 
 # 美女
@@ -17,5 +17,6 @@ def girls(request,pageIndex):
 	return render(request,'girls.html',{'girls':girls})
 
 def getMoregirls(request):
-	imges = getMoreGrils()
-	return HttpResponse(createJson(imges))
+	imgs = getMoreGrils()
+	imgs = json.loads(imgs)
+	return HttpResponse(createJson(imgs))

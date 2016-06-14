@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*-
 import random
-
 from ui.models import Image,Photography
+from django.core import serializers
 
 # 获取图片
 def getImages(pageIndex,pageSize):
@@ -42,5 +42,4 @@ def getPhotosCount():
 def getMoreGrils():
 	start = random.randint(1,getImagesCount())
 	end = start + 20
-	from django.core import serializers
 	return serializers.serialize('json',Image.objects.all()[start:end])
